@@ -1,17 +1,33 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>Programa</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <ion-list>
+    <div *ngFor="let day of data">
+      <ion-list-header >
+        {{day.date | date: 'EEEE, d'}}
+      </ion-list-header>
+      <ion-item-sliding #item *ngFor="let activity of day.activities">
+        <ion-item [class.favourite]="isFavourite(activity.id)" text-wrap (click)="displayDetails(activity.name,activity.desc)">
+          <div style="width: 18%; float: left;">{{activity.time | date: 'HH:mm'}}</div>
+          <div style="width: 80%; float: right;">{{activity.name}}</div>
+        </ion-item>
+        <ion-item-options side="left">
+          <button ion-button (click)="removeFav(activity.id)" color="fav">
+            <ion-icon name="star-outline"></ion-icon>
+            <div class="favButton">Quitar<br>favoritos</div>
+          </button>
+        </ion-item-options>
+        <ion-item-options side="right">
+          <button ion-button (click)="addFav(activity)" color="fav">
+            <ion-icon name="star"></ion-icon>
+            <div class="favButton">Añadir<br>favoritos</div>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </div>
+  </ion-list>
 </ion-content>

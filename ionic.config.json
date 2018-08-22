@@ -1,6 +1,8 @@
 {
-  "name": "santa2018",
-  "integrations": {},
+  "name": "santa",
+  "integrations": {
+    "cordova": {}
+  },
   "type": "ionic-angular",
   "pro_id": "ca420351"
 }
